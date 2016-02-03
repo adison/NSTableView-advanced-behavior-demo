@@ -8,8 +8,20 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController
+@interface ViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
 
+@property (nonatomic) IBOutlet NSTextField *label;
 
+@property (nonatomic) IBOutlet NSTableView *table;
 @end
 
+@interface BlockEntry : NSObject
+@property (nonatomic) NSString *name;
+@property (nonatomic) NSArray *entryIndex;
+@property (nonatomic) NSArray *commands;
+@end
+
+@interface CommandEntry : NSObject
+@property (nonatomic) NSString *name;
+@property (nonatomic) NSArray *entryIndex;
+@end
