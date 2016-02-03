@@ -21,6 +21,11 @@
 @implementation ViewController
 @synthesize label, table;
 
+-(void)iconCilcked:(id)sender {
+    NSLog(@"icon clicked");
+    [self tableToggleBlock:nil];
+}
+
 -(void)tableToggleBlock:(id)sender {
     if ([table clickedColumn] == 0 || [table clickedColumn] == 1) {
         // 如果是block 就折疊
@@ -47,7 +52,10 @@
 //    return NO;
 //}
 
-
+-(BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row {
+    [self tableToggleBlock:nil];
+    return YES;
+}
 
 - (NSIndexSet *)tableView:(NSTableView *)tableView selectionIndexesForProposedSelection:(NSIndexSet *)proposedSelectionIndexes {
     if([proposedSelectionIndexes count] == 1) {
@@ -194,6 +202,7 @@
     // Update the view, if already loaded.
 }
 
+
 @end
 
 
@@ -233,4 +242,14 @@
     entryIndex = aEntryIndex;
 }
 
+@end
+
+
+@implementation BlockImageIcon
+@synthesize delegate;
+
+-(BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)flag {
+    [delegate iconCilcked:nil];
+    return NO;
+}
 @end

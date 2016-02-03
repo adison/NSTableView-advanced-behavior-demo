@@ -665,7 +665,7 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--View Controller-->
+        <!--Delegate-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
@@ -681,14 +681,14 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncT-SD-awL">
-                                <rect key="frame" x="0.0" y="0.0" width="550" height="270"/>
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncT-SD-awL">
+                                <rect key="frame" x="0.0" y="0.0" width="380" height="270"/>
                                 <clipView key="contentView" id="ZC9-CT-bYg">
-                                    <rect key="frame" x="1" y="23" width="548" height="246"/>
+                                    <rect key="frame" x="1" y="23" width="378" height="246"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" headerView="TLg-ET-0ie" id="6hH-Hh-vP9">
-                                            <rect key="frame" x="0.0" y="0.0" width="548" height="246"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="378" height="246"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -700,7 +700,11 @@
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
-                                                    <imageCell key="dataCell" alignment="left" imageScaling="proportionallyDown" id="NCb-vE-7hW"/>
+                                                    <imageCell key="dataCell" alignment="left" imageScaling="proportionallyDown" id="NCb-vE-7hW" customClass="BlockImageIcon">
+                                                        <connections>
+                                                            <outlet property="delegate" destination="XfG-lQ-9wD" id="e5Q-Zi-vd2"/>
+                                                        </connections>
+                                                    </imageCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                 </tableColumn>
                                                 <tableColumn width="149" minWidth="40" maxWidth="1000" id="xLQ-zw-ElF">
@@ -716,7 +720,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                 </tableColumn>
-                                                <tableColumn identifier="commandname" width="350" minWidth="10" maxWidth="3.4028234663852886e+38" id="nN5-w4-CN3">
+                                                <tableColumn identifier="commandname" width="180" minWidth="10" maxWidth="3.4028234663852886e+38" id="nN5-w4-CN3">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="commandname">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -747,7 +751,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="TLg-ET-0ie">
-                                    <rect key="frame" x="0.0" y="0.0" width="548" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="378" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>

@@ -12,8 +12,12 @@
 -(void)setEntryIndex:(NSArray *)aEntryIndex;
 @end
 
+@protocol IconClickProtocol
+-(void)iconCilcked:(id)sender;
+@end
 
-@interface ViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
+
+@interface ViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate, IconClickProtocol>
 
 @property (nonatomic) IBOutlet NSTextField *label;
 
@@ -34,3 +38,13 @@
 @property (nonatomic) NSString *name;
 //@property (nonatomic) NSArray *entryIndex;
 @end
+
+
+@interface BlockImageIcon : NSImageCell
+
+@property (weak) IBOutlet id<IconClickProtocol> delegate;
+@end
+
+//@interface BlocIconColumn : NSTableColumn
+//
+//@end
