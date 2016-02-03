@@ -27,7 +27,7 @@
 //}
 
 -(void)tableToggleBlock:(id)sender {
-    if ([table clickedColumn] == 0) {
+    if ([table clickedColumn] == 0 || [table clickedColumn] == 1) {
         // 如果是block 就折疊
         if ([[expandTable objectAtIndex:[table clickedRow]] isKindOfClass:[BlockEntry class]]) {
             // 找到 block 物件
@@ -110,6 +110,23 @@
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
     id entry = [expandTable objectAtIndex:rowIndex];
+    if ([aTableColumn.identifier isEqualToString:@"blockimage"]) {
+        // image
+        if ([entry isKindOfClass:[BlockEntry class]]) {
+            BlockEntry *aa = (BlockEntry*)entry;
+            if (aa.isExpand) {
+                return [NSImage imageNamed:@"open"];
+            }
+            else {
+                return [NSImage imageNamed:@"close"];
+            }
+        }
+        else {
+//                return [NSImage imageNamed:@"close"];
+            return nil;
+        }
+    }
+    
     return [entry description];
 }
 
