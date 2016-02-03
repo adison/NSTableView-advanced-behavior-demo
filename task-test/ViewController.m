@@ -21,11 +21,6 @@
 @implementation ViewController
 @synthesize label, table;
 
-//- (BOOL)tableView:(NSTableView *)aTableView shouldSelectTableColumn:(NSTableColumn *)aTableColumn {
-//    return YES;
-//    
-//}
-
 -(void)tableToggleBlock:(id)sender {
     if ([table clickedColumn] == 0 || [table clickedColumn] == 1) {
         // 如果是block 就折疊
@@ -40,10 +35,17 @@
     else {
         //
     }
+    NSLog(@"run toggle");
 }
 
 #pragma mark - delegate
-
+//-(BOOL)tableView:(NSTableView *)tableView shouldEditTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+//    [self tableToggleBlock:nil];
+//    if ([tableColumn.identifier isEqualToString:@"commandname"]) {
+//        return YES;
+//    }
+//    return NO;
+//}
 
 
 
@@ -99,7 +101,6 @@
             }
         }
     }
-    
     return returnIndexSet;
 }
 
@@ -122,11 +123,9 @@
             }
         }
         else {
-//                return [NSImage imageNamed:@"close"];
             return nil;
         }
     }
-    
     return [entry description];
 }
 
@@ -160,8 +159,8 @@
 -(void)viewWillAppear {
     [super viewWillAppear];
     [table setAllowsMultipleSelection: YES];
-    [table setTarget:self]; 
-    [table setDoubleAction:@selector(tableToggleBlock:)];
+//    [table setTarget:self]; 
+//    [table setDoubleAction:@selector(tableToggleBlock:)];
 }
 
 
