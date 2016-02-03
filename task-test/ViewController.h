@@ -18,6 +18,9 @@
 @property (nonatomic) IBOutlet NSTextField *label;
 
 @property (nonatomic) IBOutlet NSTableView *table;
+
+-(IBAction)tableToggleBlock:(id)sender;
+
 @end
 
 @interface BlockEntry : NSObject <EntryIndexProtocol>

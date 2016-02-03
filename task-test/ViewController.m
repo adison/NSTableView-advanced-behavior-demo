@@ -9,7 +9,7 @@
 #import "ViewController.h"
 
 @interface ViewController () {
-    NSArray *dataArray;
+    NSMutableArray *dataArray;
     NSArray *expandedArray;
     NSMutableArray *expandTable;
     NSIndexSet *tableSelection;
@@ -21,8 +21,32 @@
 @implementation ViewController
 @synthesize label, table;
 
+//- (BOOL)tableView:(NSTableView *)aTableView shouldSelectTableColumn:(NSTableColumn *)aTableColumn {
+//    return YES;
+//    
+//}
+
+-(void)tableToggleBlock:(id)sender {
+    if ([table clickedColumn] == 0) {
+        // 如果是block 就折疊
+        if ([[expandTable objectAtIndex:[table clickedRow]] isKindOfClass:[BlockEntry class]]) {
+            // 找到 block 物件
+            BlockEntry *clickedBlock = (BlockEntry *)[expandTable objectAtIndex:[table clickedRow]];
+            clickedBlock.isExpand = !clickedBlock.isExpand;
+            [self refreshData];
+            [table reloadData];
+        }
+    }
+    else {
+        //
+    }
+}
 
 #pragma mark - delegate
+
+
+
+
 - (NSIndexSet *)tableView:(NSTableView *)tableView selectionIndexesForProposedSelection:(NSIndexSet *)proposedSelectionIndexes {
     if([proposedSelectionIndexes count] == 1) {
         // 單選
@@ -94,28 +118,35 @@
     // data source 更新時，需要重新設定一次 expandedArray, expandTable 並進入預設狀態: 全部展開
     
     // 將 data source 不分層級全部展開放到 exapand array 中
-    NSMutableArray *tempExpand = [[NSMutableArray alloc] init];
+    NSMutableArray *tempExpandArray = [[NSMutableArray alloc] init];
+    NSMutableArray *tempExpandTable = [[NSMutableArray alloc] init];
     for (id tempBlock in dataArray) {
         if ([tempBlock isKindOfClass:[BlockEntry class]]) {
             BlockEntry *block = (BlockEntry *)tempBlock;
-            [tempExpand addObject:block];
-            if (block.isExpand) {
-                for (id tempCommand in block.commands) {
-                    CommandEntry *commmand = (CommandEntry *)tempCommand;
-                    [tempExpand addObject:commmand];
+            [tempExpandArray addObject:block];
+            [tempExpandTable addObject:block];
+            
+            for (id tempCommand in block.commands) {
+                CommandEntry *commmand = (CommandEntry *)tempCommand;
+                [tempExpandArray addObject:commmand];
+                if (block.isExpand) {
+                    [tempExpandTable addObject:commmand];
                 }
             }
         }
     }
-    expandedArray = tempExpand;
-    expandTable = tempExpand;
+    expandedArray = tempExpandArray;
+    expandTable = tempExpandTable;
 }
 
 
 -(void)viewWillAppear {
     [super viewWillAppear];
     [table setAllowsMultipleSelection: YES];
+    [table setTarget:self]; 
+    [table setDoubleAction:@selector(tableToggleBlock:)];
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -129,7 +160,7 @@
         NSMutableArray *tempCommandList = [[NSMutableArray alloc] init];
         for (int j=0, jj=8; j<jj; j++) {
             CommandEntry *command = [[CommandEntry alloc] init];
-            command.name = [NSString stringWithFormat:@"command %i %i", j, j];
+            command.name = [NSString stringWithFormat:@"command %i %i", i, j];
             command.entryIndex = @[@(i), @(j)];
             [tempCommandList addObject:command];
         }

@@ -752,6 +752,10 @@
                             <constraint firstAttribute="bottom" secondItem="ncT-SD-awL" secondAttribute="bottom" id="p29-Rk-4mW"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="label" destination="4vc-jx-1hm" id="Ie7-G4-YSr"/>
+                        <outlet property="table" destination="6hH-Hh-vP9" id="sLx-9K-VQC"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
