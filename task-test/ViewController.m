@@ -23,19 +23,6 @@
 
 
 #pragma mark - delegate
-- (BOOL)tableView:(NSTableView *)aTableView
-  shouldSelectRow:(NSInteger)rowIndex {
-    // 如果是多選，判斷新的選項是否與已選擇的內容相容
-    if (YES) {
-        // 新的選項
-        
-        
-    }
-    // 如果不是多選，允許選擇並根據選項切換
-    
-    return YES;
-}
-
 - (NSIndexSet *)tableView:(NSTableView *)tableView selectionIndexesForProposedSelection:(NSIndexSet *)proposedSelectionIndexes {
     if([proposedSelectionIndexes count] == 1) {
         // 單選
@@ -71,22 +58,20 @@
                 BOOL underSamePath = YES;
                 NSInteger checkingIndex = 0;
                 if ([selectedEntryIndex count] == 1) {
-                    // 特殊情況，選擇了最上層物件
-                    
+                    // 特殊情況，選擇了最上層物件, 不用比對
                 }
                 else {
+                    // 只比較最後一個元素之前的元素
                     do {
                         if ([checkingIndexEntry objectAtIndex:checkingIndex] != [selectedEntryIndex objectAtIndex:checkingIndex]) {
                             underSamePath = NO;
                         }
                         checkingIndex++;
                     } while (checkingIndex < ([checkingIndexEntry count] - 1));
-                    
                 }
                 if (underSamePath) {
                     [returnIndexSet addIndex:[selectedIndexArray[i] integerValue]];
                 }
-
             }
         }
     }
